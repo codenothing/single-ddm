@@ -1,0 +1,7 @@
+Single Drop Down Menu
+March 24, 2008
+Corey Hart @ http://www.codenothing.com
+
+@timer: milliseconds to keep dropped menus open
+@parentMO: CSS class to add/remove to parent list on mouseover/mouseout's
+@childMO: CSS class to add/remove to child list on mouseover/mouseout's

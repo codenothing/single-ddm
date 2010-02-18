@@ -1,0 +1,42 @@
+<html>
+<head>
+	<link rel='stylesheet' type='text/css' href='styles.css' />
+	<script type='text/javascript' src='jquery-1.3.1.min.js'></script>
+	<script type='text/javascript' src='jquery.single-ddm.pack.js'></script>
+<script type='text/javascript'>
+$(document).ready(function(){
+	$('.ddmenu').singleDropMenu({parentMO: 'ddmenu-hover', childMO: 'ddchildhover'});
+});
+</script>
+</head>
+<body>
+<!--
+Single Drop Down Menu
+March 24, 2009
+Corey Hart @ http://www.codenothing.com
+-->
+
+
+<ul class='ddmenu'>
+	<li>
+		<a href='http://www.codenothing.com'>Home</a>
+		<ul>
+			<li><a href='http://www.codenothing.com/index.php?blog=2'>Database.php</a></li>
+			<li><a href='http://www.codenothing.com/index.php?blog=5'>PHP RSS Feed</a></li>
+			<li><a href='http://www.codenothing.com/index.php?blog=6'>Snippet: pageLinks</a></li>
+		</ul>
+	</li>
+	<li>
+		<a href='http://www.codenothing.com/index.php?blog=1'>About Me</a>
+	</li>
+	<li>
+		<a href='http://www.codenothing.com/index.php?list=1'>Blogs</a>
+		<ul>
+			<li><a href='http://www.codenothing.com/index.php?blog=4'>Snippet: encode</a></li>
+			<li><a href='http://www.codenothing.com/index.php?blog=7'>Local Server</a></li>
+		</ul>
+	</li>
+</ul>
+
+</body>
+</html>
