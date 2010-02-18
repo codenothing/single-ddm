@@ -1,8 +1,8 @@
 /**
- * Single Drop Down Menu - CSS Temp
- * March 24, 2009
+ * Single Drop Down Menu 1.1 - CSS Temp
+ * August 20, 2009
  * Corey Hart @ http://www.codenothing.com
- */ 
+ */
 
 .ddmenu {
 	list-style: none;
@@ -62,10 +62,3 @@
 .ddmenu > li ul a.ddchildhover {
 	background-color: #f1f1f1;
 }
-
-/* Uncomment for use of css hover functionality */
-/*
-.ddmenu > li ul a:hover {
-	background-color: #f1f1f1;
-}
-*/

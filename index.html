@@ -1,21 +1,37 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
+	<title>Single Drop Down Menu 1.1</title>
 	<link rel='stylesheet' type='text/css' href='styles.css' />
 	<script type='text/javascript' src='jquery-1.3.1.min.js'></script>
-	<script type='text/javascript' src='jquery.single-ddm.pack.js'></script>
-<script type='text/javascript'>
-$(document).ready(function(){
-	$('.ddmenu').singleDropMenu({parentMO: 'ddmenu-hover', childMO: 'ddchildhover'});
-});
-</script>
+	<script type='text/javascript' src='jquery.single-ddm.js'></script>
 </head>
 <body>
 <!--
-Single Drop Down Menu
-March 24, 2009
+Single Drop Down Menu 1.1
+August 22, 2009
 Corey Hart @ http://www.codenothing.com
 -->
 
+<h1>Single Drop Down Menu 1.1</h1>
+
+
+<pre>
+$(function(){
+	$('.ddmenu').singleDropMenu({parentMO: 'ddmenu-hover', childMO: 'ddchildhover', timer: 1500});
+});
+</pre>
+
+
+<script type='text/javascript'>
+$(function(){
+	$('.ddmenu').singleDropMenu({parentMO: 'ddmenu-hover', childMO: 'ddchildhover', timer: 1500});
+});
+</script>
+
+<br clear='all' />
 
 <ul class='ddmenu'>
 	<li>
@@ -38,5 +54,9 @@ Corey Hart @ http://www.codenothing.com
 	</li>
 </ul>
 
+<br>
+<div style='margin-top: 75px; font-size: 10pt;'>
+	<a href='docs.html'>Docs</a>
+</div>
 </body>
 </html>
