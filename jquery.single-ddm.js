@@ -1,36 +1,52 @@
-/**
- * Single Drop Down Menu 1.1
- * August 22, 2009
+/*!
+ * Single Drop Down Menu 1.2
+ * September 26, 2009
  * Corey Hart @ http://www.codenothing.com
  */
-;(function($){
- 	// Define the function
+;(function($, undefined){
+	// bgiframe is needed to fix z-index problem for IE6 users.
+	$.fn.bgiframe = $.fn.bgiframe ? $.fn.bgiframe : $.fn.bgIframe ? $.fn.bgIframe : function(){
+		// For applications that don't have bgiframe plugin installed, create a useless 
+		// function that doesn't break the chain
+		return this;
+	};
+
+ 	// Drop Menu Plugin
 	$.fn.singleDropMenu = function(options){
 		return this.each(function(){
 			// Default Settings
 			var $obj = $(this), timer, menu,
 				settings = $.extend({
 					timer: 500,
-					parentMO: 'non-404',
-					childMO: 'non-404'
+					parentMO: undefined,
+					childMO: undefined,
+					show: 'show',
+					hide: 'hide'
 				}, options||{}, $.metadata ? $obj.metadata() : {});
 	
 			// Run Menu
-			$obj.children('li').mouseover(function(){
+			$obj.children('li').bind('mouseover.single-ddm', function(){
 				// Clear any open menus
-				closemenu();
+				if (menu && menu.data('single-ddm-i') != $(this).data('single-ddm-i'))
+					closemenu();
+				else
+					menu =false;
+				
 				// Open nested list
-				$(this).children('a').addClass(settings.parentMO).siblings('ul').show();
-			}).mouseout(function(){
+				$(this).children('a').addClass(settings.parentMO).siblings('ul')[settings.show]();
+			}).bind('mouseout.single-ddm', function(){
 				// Prevent auto close
 				menu = $(this);
 				timer = setTimeout(closemenu, settings.timer);
-			});
+			}).each(function(i){
+				// Attach indexs to each menu
+				$(this).data('single-ddm-i', i);
+			}).children('ul').bgiframe();
 
 			// Dropped Menu Highlighting
-			$('li > ul > li', $obj).hover(function(){
+			$('li > ul > li', $obj).bind('mouseover.single-ddm', function(){
 				$('a', this).addClass(settings.childMO);
-			}, function(){
+			}).bind('mouseout.single-ddm', function(){
 				$('a', this).removeClass(settings.childMO);
 			});
 	
@@ -40,7 +56,7 @@
 			// Function to close set menu
 			function closemenu(){
 				if (menu && timer){
-					menu.children('a').removeClass(settings.parentMO).siblings('ul').hide();
+					menu.children('a').removeClass(settings.parentMO).siblings('ul')[settings.hide]();
 					clearTimeout(timer);
 					menu = false;
 				}

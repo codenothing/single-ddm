@@ -3,7 +3,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-	<title>Single Drop Down Menu 1.1</title>
+	<title>Single Drop Down Menu 1.2</title>
 	<link rel='stylesheet' type='text/css' href='docs.css' />
 	<script type='text/javascript' src='jquery-1.3.1.min.js'></script>
 	<script type='text/javascript' src='jquery.history.js'></script>
@@ -17,21 +17,26 @@ $(function(){
 </script>
 </head>
 <body>
-
 <!--
-Single Drop Down Menu 1.1
-August 22, 2009
+Single Drop Down Menu 1.2
+September 26, 2009
 Corey Hart @ http://www.codenothing.com
 -->
 
-<h1>Single Drop Menu 1.1 Options</h1>
+<h1>Single Drop Menu 1.2 Options</h1>
 
 <ul id='menu'>
 	<li class='title'>Options</li>
 	<li><a href='#childMO'>childMO</a></li>
 	<li><a href='#parentMO'>parentMO</a></li>
 	<li><a href='#timer'>timer</a></li>
-	<li class='back'><a href='index.html'>&lt;--Back to index</a></li>
+	<li><a href='#show'>show</a></li>
+	<li><a href='#hide'>hide</a></li>
+
+	<li class='index' style='margin-top:20px;list-style:none;font-size:8pt;'><a href='index.html'><i>&lt;--Back to index</i></a></li>
+	<li class='index' style='list-style:none;font-size:8pt;'>
+		<a href='http://www.codenothing.com/archives/jquery/single-drop-down-menu/'><i>&lt;--Back to Original Article</i></a>
+	</li>
 </ul>
 
 
@@ -51,6 +56,14 @@ Corey Hart @ http://www.codenothing.com
 
 <h3><div class='default'>500</div> <a name='timer'>timer</a> - <span class='type'>Integer</span></h3>
 <p>Time in milliseconds of how long the menu will stay open after the mouse loses focus of the menu</p>
+
+
+<h3><div class='default'>'show'</div> <a name='show'>show</a> - <span class='type'>String / jQuery fn</span></h3>
+<p>Name of jQuery function to show the drop down</p>
+
+
+<h3><div class='default'>'hide'</div> <a name='hide'>hide</a> - <span class='type'>String / jQuery fn</span></h3>
+<p>Name of jQuery function to hide the drop down</p>
 
 
 </body>
