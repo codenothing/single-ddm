@@ -1,7 +1,3 @@
-Single Drop Down Menu @VERSION
-@DATE
+Single Drop Down Menu [VERSION]
+[DATE]
 Corey Hart @ http://www.codenothing.com
-
-
-For tagging, run the following and replace date/version with current
-grep -ilr --exclude-dir=.git ‘old-word’ * | xargs -i@ sed -i ’s/old-word/new-word/g’ @

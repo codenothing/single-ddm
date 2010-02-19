@@ -1,9 +1,9 @@
 /*!
- * Single Drop Down Menu @VERSION
- * @DATE
+ * Single Drop Down Menu [VERSION]
+ * [DATE]
  * Corey Hart @ http://www.codenothing.com
  */
-;(function($){
+(function($){
 	// bgiframe is needed to fix z-index problem for IE6 users.
 	$.fn.bgiframe = $.fn.bgiframe ? $.fn.bgiframe : $.fn.bgIframe ? $.fn.bgIframe : function(){
 		// For applications that don't have bgiframe plugin installed, create a useless 
