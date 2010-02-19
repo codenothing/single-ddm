@@ -1,9 +1,9 @@
 /*!
- * Single Drop Down Menu 1.2
- * September 26, 2009
+ * Single Drop Down Menu @VERSION
+ * @DATE
  * Corey Hart @ http://www.codenothing.com
  */
-;(function($, undefined){
+;(function($){
 	// bgiframe is needed to fix z-index problem for IE6 users.
 	$.fn.bgiframe = $.fn.bgiframe ? $.fn.bgiframe : $.fn.bgIframe ? $.fn.bgIframe : function(){
 		// For applications that don't have bgiframe plugin installed, create a useless 
@@ -18,8 +18,8 @@
 			var $obj = $(this), timer, menu,
 				settings = $.extend({
 					timer: 500,
-					parentMO: undefined,
-					childMO: undefined,
+					parentMO: '',
+					childMO: '',
 					show: 'show',
 					hide: 'hide'
 				}, options||{}, $.metadata ? $obj.metadata() : {});
@@ -29,14 +29,17 @@
 				// Clear any open menus
 				if (menu && menu.data('single-ddm-i') != $(this).data('single-ddm-i'))
 					closemenu();
-				else
-					menu =false;
+				else{
+					menu = false;
+					if (timer) timer = clearTimeout(timer);
+				}
 				
 				// Open nested list
 				$(this).children('a').addClass(settings.parentMO).siblings('ul')[settings.show]();
 			}).bind('mouseout.single-ddm', function(){
 				// Prevent auto close
 				menu = $(this);
+				if (timer) clearTimeout(timer);
 				timer = setTimeout(closemenu, settings.timer);
 			}).each(function(i){
 				// Attach indexs to each menu
@@ -44,7 +47,7 @@
 			}).children('ul').bgiframe();
 
 			// Dropped Menu Highlighting
-			$('li > ul > li', $obj).bind('mouseover.single-ddm', function(){
+			$obj.find('li > ul > li').bind('mouseover.single-ddm', function(){
 				$('a', this).addClass(settings.childMO);
 			}).bind('mouseout.single-ddm', function(){
 				$('a', this).removeClass(settings.childMO);
@@ -57,7 +60,7 @@
 			function closemenu(){
 				if (menu && timer){
 					menu.children('a').removeClass(settings.parentMO).siblings('ul')[settings.hide]();
-					clearTimeout(timer);
+					timer = clearTimeout(timer);
 					menu = false;
 				}
 			}
