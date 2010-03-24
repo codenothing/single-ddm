@@ -28,53 +28,57 @@ $.fn.singleDropMenu = function(options){
 
 		// Run Menu
 		$obj.children('li').bind({
-			'mouseover.single-ddm': function(){
+			'mouseenter.single-ddm': function(){
 				// Clear any open menus
 				if ( $menu && $menu.data('single-ddm-i') != $(this).data('single-ddm-i') ) {
 					closemenu();
 				} else {
 					$menu = false;
-					if (timer) timer = clearTimeout(timer);
+					if ( timer ) {
+						timer = clearTimeout( timer );
+					}
 				}
 				
 				// Open nested list
-				$(this).children('a').addClass(settings.parentMO).siblings('ul')[settings.show]();
+				$(this).children('a').addClass( settings.parentMO ).siblings('ul')[ settings.show ]();
 			},
-			'mouseout.single-ddm': function(){
-				// Prevent auto close
+			'mouseleave.single-ddm': function(){
+				if ( timer ) {
+					clearTimeout( timer );
+				}
+
 				$menu = $(this);
-				if (timer) clearTimeout(timer);
-				timer = setTimeout(closemenu, settings.timer);
+				timer = setTimeout( closemenu, settings.timer );
 			}
 		})
 		.each(function(i){
 			// Attach indexs to each menu
-			$(this).data('single-ddm-i', i);
+			$(this).data( 'single-ddm-i', i );
 		})
 		// Each nested list needs to be wrapper with bgiframe if possible
 		.children('ul').bgiframe();
 
 		// Dropped Menu Highlighting
 		$obj.find('li > ul > li').bind({
-			'mouseover.single-ddm': function(){
-				$(this).children('a').addClass(settings.childMO);
+			'mouseenter.single-ddm': function(){
+				$(this).children('a').addClass( settings.childMO );
 			},
-			'mouseout.single-ddm': function(){
-				$(this).children('a').removeClass(settings.childMO);
+			'mouseleave.single-ddm': function(){
+				$(this).children('a').removeClass( settings.childMO );
 			}
 		});
 
 		// Function to close set menu
 		function closemenu(){
 			if ( $menu && timer ){
-				$menu.children('a').removeClass(settings.parentMO).siblings('ul')[settings.hide]();
-				timer = clearTimeout(timer);
+				$menu.children('a').removeClass( settings.parentMO ).siblings('ul')[ settings.hide ]();
+				timer = clearTimeout( timer );
 				$menu = false;
 			}
 		}
 
 		// Closes any open menus when mouse click occurs anywhere else on the page
-		$(document).click(closemenu);
+		$(document).click( closemenu );
 	});
 };
 
