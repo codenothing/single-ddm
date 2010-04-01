@@ -17,56 +17,50 @@ $.fn.bgiframe = $.fn.bgiframe ? $.fn.bgiframe : $.fn.bgIframe ? $.fn.bgIframe : 
 $.fn.singleDropMenu = function(options){
 	return this.each(function(){
 		// Default Settings
-		var $obj = $(this), timer, $menu,
+		var $main = $(this), timer, $menu, $li,
 			settings = $.extend({
 				timer: 500,
 				parentMO: '',
 				childMO: '',
 				show: 'show',
 				hide: 'hide'
-			}, options||{}, $.metadata ? $obj.metadata() : {});
+			}, options||{}, $.metadata ? $main.metadata() : {});
 
 		// Run Menu
-		$obj.children('li').bind({
-			'mouseenter.single-ddm': function(){
-				// Clear any open menus
-				if ( $menu && $menu.data('single-ddm-i') != $(this).data('single-ddm-i') ) {
-					closemenu();
-				} else {
-					$menu = false;
-					if ( timer ) {
-						timer = clearTimeout( timer );
-					}
-				}
-				
-				// Open nested list
-				$(this).children('a').addClass( settings.parentMO ).siblings('ul')[ settings.show ]();
-			},
-			'mouseleave.single-ddm': function(){
+		$main.delegate('li', 'mouseenter.single-ddm', function(){
+			// Clear any open menus
+			if ( ( $li = $(this) ).data('single-ddm-toplevel') !== true ) {
+				$li.children('a').addClass( settings.childMO );
+				return true;
+			}
+			else if ( ! $menu || $menu[0] !== $li[0] ) {
+				closemenu();
+				$li.children('a').addClass( settings.parentMO ).siblings('ul')[ settings.show ]();
+			}
+			else {
+				$menu = false;
 				if ( timer ) {
-					clearTimeout( timer );
+					timer = clearTimeout( timer );
 				}
-
-				$menu = $(this);
-				timer = setTimeout( closemenu, settings.timer );
 			}
 		})
-		.each(function(i){
-			// Attach indexs to each menu
-			$(this).data( 'single-ddm-i', i );
+		.delegate('li', 'mouseleave.single-ddm', function(){
+			if ( ( $li = $(this) ).data('single-ddm-toplevel') !== true ) {
+				$li.children('a').removeClass( settings.childMO );
+				return true;
+			}
+			else if ( timer ) {
+				clearTimeout( timer );
+			}
+
+			$menu = $li;
+			timer = setTimeout( closemenu, settings.timer );
 		})
 		// Each nested list needs to be wrapper with bgiframe if possible
+		.children('li').each(function(){
+			$(this).data('single-ddm-toplevel', true);
+		})
 		.children('ul').bgiframe();
-
-		// Dropped Menu Highlighting
-		$obj.find('li > ul > li').bind({
-			'mouseenter.single-ddm': function(){
-				$(this).children('a').addClass( settings.childMO );
-			},
-			'mouseleave.single-ddm': function(){
-				$(this).children('a').removeClass( settings.childMO );
-			}
-		});
 
 		// Function to close set menu
 		function closemenu(){

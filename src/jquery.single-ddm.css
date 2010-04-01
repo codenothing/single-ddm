@@ -10,11 +10,11 @@
 	margin: 0;
 }
 
-.ddmenu > li {
+.ddmenu li {
 	float: left;
 }
 
-.ddmenu > li > a {
+.ddmenu li a {
 	display: block;
 	width: 100px;
 	text-align:center;
@@ -27,12 +27,12 @@
 	border: 1px solid #c5c5c5;
 }
 
-.ddmenu > li > .ddmenu-hover {
+.ddmenu li .ddmenu-hover {
 	background-color: #c5c5c5;
 	border-left: 1px solid #545454;
 }
 
-.ddmenu > li ul {
+.ddmenu li ul {
 	display: none;
 	list-style: none;
 	position: absolute;
@@ -41,24 +41,28 @@
 	padding: 0;
 }
 
-.ddmenu > li ul a {
+.ddmenu li ul li {
+	float: none;
+}
+
+.ddmenu li ul a {
 	display: block;
 	width: 152px;
 	padding: 5px;
-	border-bottom: 1px solid #545454;
-	border-right: 1px solid #545454;
-	border-left: 1px solid #545454;
+	border: 1px solid #545454;
+	border-top: none;
 	text-decoration: none;
+	text-align: left;
 	font-weight: bold;
 	font-size: 10pt;
 	color: #232323;
 	background-color: #c5c5c5;
 }
 
-.ddmenu > li ul li a.first {
+.ddmenu li ul li a.first {
 	border-top: 1px solid #545454;
 }
 
-.ddmenu > li ul a.ddchildhover {
+.ddmenu li ul a.ddchildhover {
 	background-color: #f1f1f1;
 }
