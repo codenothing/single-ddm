@@ -4,7 +4,7 @@
 Creates a simple drop down menu from a ul/li layout.
 
 
-Bowser Support
+Browser Support
 --------------
 
 **IE** 6, 7, 8  
