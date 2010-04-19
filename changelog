@@ -1,0 +1,12 @@
+###
+### Single Drop Down Menu [VERSION] Change Log
+### [DATE]
+### Corey Hart @ http://www.codenothing.com
+###
+
+# New Features
+-Using delegate on the wrapper element for single event binding and cleaner implementation
+-Full cross browser support added
+
+# Possible Breaks
+-Removed bgiframe namespace creation, now using internal copy
