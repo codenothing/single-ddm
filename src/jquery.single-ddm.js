@@ -1,41 +1,45 @@
-/*!
+/*
  * Single Drop Down Menu [VERSION]
  * [DATE]
  * Corey Hart @ http://www.codenothing.com
  */
-(function( $ ){
+(function( $, undefined ){
 
 
 // bgiframe is needed to fix z-index problem for IE6 users.
-$.fn.bgiframe = $.fn.bgiframe ? $.fn.bgiframe : $.fn.bgIframe ? $.fn.bgIframe : function(){
-	// For applications that don't have bgiframe plugin installed, create a useless 
-	// function that doesn't break the chain
+// For applications that don't have bgiframe plugin installed, create a useless 
+// function that doesn't break the chain
+function emptyfn(){
 	return this;
-};
+}
 
 // Drop Menu Plugin
-$.fn.singleDropMenu = function(options){
+$.fn.singleDropMenu = function( options ) {
 	return this.each(function(){
 		// Default Settings
-		var $main = $(this), timer, $menu, $li,
+		var $main = $(this), timer, $menu, $li, el,
 			settings = $.extend({
 				timer: 500,
-				parentMO: '',
-				childMO: '',
+				parentMO: undefined,
+				childMO: undefined,
+				bgiframe: undefined,
 				show: 'show',
 				hide: 'hide'
-			}, options||{}, $.metadata ? $main.metadata() : {});
+			}, options || {}, $.metadata ? $main.metadata() : {} ),
+			
+			// bgiframe replica
+			bgiframe = $.fn.bgiframe || $.fn.bgIframe || emptyfn;
 
 		// Run Menu
-		$main.delegate('li', 'mouseenter.single-ddm', function(){
+		$main.delegate( 'li', 'mouseenter.single-ddm', function(){
 			// Clear any open menus
-			if ( ( $li = $(this) ).data('single-ddm-toplevel') !== true ) {
-				$li.children('a').addClass( settings.childMO );
+			if ( $.data( el = this, 'single-ddm-toplevel' ) !== true ) {
+				$( el ).children('a').addClass( settings.childMO );
 				return true;
 			}
-			else if ( ! $menu || $menu[0] !== $li[0] ) {
+			else if ( ! $menu || $menu[0] !== el ) {
 				closemenu();
-				$li.children('a').addClass( settings.parentMO ).siblings('ul')[ settings.show ]();
+				$( el ).children('a').addClass( settings.parentMO ).siblings('ul')[ settings.show ]();
 			}
 			else {
 				$menu = false;
@@ -45,22 +49,24 @@ $.fn.singleDropMenu = function(options){
 			}
 		})
 		.delegate('li', 'mouseleave.single-ddm', function(){
-			if ( ( $li = $(this) ).data('single-ddm-toplevel') !== true ) {
-				$li.children('a').removeClass( settings.childMO );
+			if ( $.data( el = this, 'single-ddm-toplevel' ) !== true ) {
+				$( el ).children('a').removeClass( settings.childMO );
 				return true;
 			}
-			else if ( timer ) {
+			
+			if ( timer ) {
 				clearTimeout( timer );
 			}
 
-			$menu = $li;
+			$menu = $( el );
 			timer = setTimeout( closemenu, settings.timer );
-		})
+		});
+
 		// Each nested list needs to be wrapper with bgiframe if possible
-		.children('li').each(function(){
-			$(this).data('single-ddm-toplevel', true);
-		})
-		.children('ul').bgiframe();
+		bgiframe.call(
+			$main.children('li').data( 'single-ddm-toplevel', true ).children('ul'),
+			settings.bgiframe
+		);
 
 		// Function to close set menu
 		function closemenu(){
