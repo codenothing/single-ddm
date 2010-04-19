@@ -1,6 +1,6 @@
 /*
- * Single Drop Down Menu [VERSION]
- * [DATE]
+ * Single Drop Down Menu 1.3
+ * April 18, 2010
  * Corey Hart @ http://www.codenothing.com
  */
 (function(a,f){function i(){return this}a.fn.singleDropMenu=function(j){return this.each(function(){function g(){if(d&&b){d.children("a").removeClass(c.parentMO).siblings("ul")[c.hide]();b=clearTimeout(b);d=false}}var h=a(this),b,d,e,c=a.extend({timer:500,parentMO:f,childMO:f,bgiframe:f,show:"show",hide:"hide"},j||{},a.metadata?h.metadata():{}),k=a.fn.bgiframe||a.fn.bgIframe||i;h.delegate("li","mouseenter.single-ddm",function(){if(a.data(e=this,"single-ddm-toplevel")!==true){a(e).children("a").addClass(c.childMO);
